@@ -1,2 +1,2 @@
 # LinkedListSample
-Practicing the linklist design
+Practicing the linkedlist design
