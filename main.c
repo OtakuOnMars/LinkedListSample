@@ -107,14 +107,36 @@ void display_value_from_tail(linkedlist* llist) {
 }
 
 //remove from head
+node *remove_from_head(linkedlist *LinkedList) {
+    node *headNode = NULL;
+    node *SecNode = NULL;
+    headNode = LinkedList->head;
+    LinkedList->head = headNode->next;
+    SecNode = headNode->next;
+    SecNode->previous = LinkedList->head;
+    LinkedList->num--;
+    return headNode;
+}
 
 //remote from tail
+node *remove_from_tail(linkedlist *LinkedList) {
+    node *tailNode = NULL;
+    node *SecNode = NULL;
+    tailNode = LinkedList->tail;
+    LinkedList->tail = tailNode->previous;
+    SecNode = tailNode->previous;
+    SecNode->next = NULL;
+    LinkedList->num--;
+    return tailNode;
+}
 
 // Find the node
 
 // insert node to specific num
 
 int main(int argc, const char *argv[]) {
+    node *TestNode = NULL;
+
     // init value
     linkedlist *LinkedList = createLinkedList();
     insert_into_head(LinkedList, 1);
@@ -126,7 +148,15 @@ int main(int argc, const char *argv[]) {
 
     printf("There are %d node in the linkedlist\n", LinkedList->num);
     display_value_from_head(LinkedList);
-    display_value_from_tail(LinkedList);
+
+    TestNode = remove_from_tail(LinkedList);
+    printf("head node in the list : %d \n", TestNode->value);
+    free(TestNode);
+    TestNode = remove_from_tail(LinkedList);
+    printf("Current head node in the list : %d \n", TestNode->value);
+    free(TestNode);
+    display_value_from_head(LinkedList);
+
     printf("end of linked list sample \n");
     return 0;
 }
